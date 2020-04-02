@@ -1,0 +1,29 @@
+{
+  "name": "logzio-cli",
+  "version": "0.0.1",
+  "description": "A CLI to interact with Logz.IO APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ukmadlz/logzio-cli.git"
+  },
+  "keywords": [
+    "Logz.IO"
+  ],
+  "author": "Mike Elsmore <mike.elsmore@logz.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ukmadlz/logzio-cli/issues"
+  },
+  "homepage": "https://github.com/ukmadlz/logzio-cli#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "axios": "^0.19.2",
+    "conf": "^6.2.1",
+    "debug": "^4.1.1",
+    "js-fire": "^0.7.3"
+  }
+}
