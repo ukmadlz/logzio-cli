@@ -1,7 +1,8 @@
 #! /usr/bin/env node
 // CLI framework
 const Fire = require('js-fire');
-// Commands 
+// Commands
+const AccountCommand = require('./commands/account');
 const ConfigCommand = require('./commands/config');
 const SearchCommand = require('./commands/search');
 const ScrollCommand = require('./commands/scroll');
@@ -16,6 +17,8 @@ const commands = {
     search: SearchCommand,
     // Scroll
     scroll: ScrollCommand,
+    // Account
+    account: AccountCommand,
 };
 
 Fire(commands);
