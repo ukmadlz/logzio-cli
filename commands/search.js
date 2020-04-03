@@ -13,7 +13,7 @@ module.exports = (query, from, size, sort, _source, post_filter, aggs, dayOffset
     if (aggs) data.aggs = aggs;
     const { error } = SearchValidator.validate(data);
     if (error) {
-        debug.log('Please provide valid parts of a request');
+        debug.log('Please provide valid parts of a search request');
         debug.error(error);
         process.exit(1);
     }

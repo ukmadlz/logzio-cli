@@ -4,6 +4,7 @@ const Fire = require('js-fire');
 // Commands
 const AccountCommand = require('./commands/account');
 const ConfigCommand = require('./commands/config');
+const EndpointCommand = require('./commands/endpoints');
 const SearchCommand = require('./commands/search');
 const ScrollCommand = require('./commands/scroll');
 
@@ -19,6 +20,8 @@ const commands = {
     scroll: ScrollCommand,
     // Account
     account: AccountCommand,
+    // Notifications Endpoints
+    endpoints: EndpointCommand,
 };
 
 Fire(commands);
