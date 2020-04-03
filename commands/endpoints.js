@@ -33,6 +33,20 @@ module.exports = {
                 debug.log(' Body Template: %O', bodyTemplate);
             })
     },
+    // Delete an endpoint
+    delete: (id) => {
+        // Validate the Endpoint ID
+        const idJoiValidate = Joi.number().required().validate(id);
+        if(idJoiValidate.error) {
+            debug.log('Please provide a valid Endpoint ID');
+            debug.error(idJoiValidate.error);
+            process.exit(1);
+        }
+        return axios.delete(`/endpoints/${id}`)
+            .then(response => {
+                debug.log('Successfully deleted endpoint %s', id);
+            });
+    },
     // Custom Endpoints
     'custom:create': (title, description, url, method='POST', headers, bodyTemplate, test=false) => {
         const data = {};
