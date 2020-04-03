@@ -12,6 +12,27 @@ module.exports = {
                 console.table(response.data);
             })
     },
+    // Get Endpoint Data
+    get: (id) => {
+        // Validate the Endpoint ID
+        const idJoiValidate = Joi.number().required().validate(id);
+        if(idJoiValidate.error) {
+            debug.log('Please provide a valid Endpoint ID');
+            debug.error(idJoiValidate.error);
+            process.exit(1);
+        }
+        return axios.get(`/endpoints/${id}`)
+            .then(response => {
+                const { title, description, url, method, headers, bodyTemplate} = response.data;
+                debug.log('Endpoint: %s', id)
+                debug.log(' Title: %s', title);
+                debug.log(' Description: %s', description);
+                debug.log(' URL: %s', url);
+                debug.log(' Method: %s', method);
+                debug.log(' Headers: %O', headers);
+                debug.log(' Body Template: %O', bodyTemplate);
+            })
+    },
     // Custom Endpoints
     'custom:create': (title, description, url, method='POST', headers, bodyTemplate, test=false) => {
         const data = {};
