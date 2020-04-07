@@ -1,5 +1,6 @@
 const ScrollValidator = require('../validators/scroll');
 const axios = require('../helpers/axios');
+const debug = require('../helpers/debug');
 const displayHits = require('../helpers/displayHits');
 
 module.exports = (query, from, size, sort, _source, post_filter, scroll, scrollId) => {
@@ -13,7 +14,7 @@ module.exports = (query, from, size, sort, _source, post_filter, scroll, scrollI
     const { error } = ScrollValidator.validate(data);
 
     if (error) {
-        debug.log('Please provide valid parts of a request');
+        console.log('Please provide valid parts of a request');
         debug.error(error);
         process.exit(1);
     }
@@ -21,7 +22,7 @@ module.exports = (query, from, size, sort, _source, post_filter, scroll, scrollI
     return axios.post('/scroll', data, config)
         .then(response => {
             const { scrollId, hits } = response.data;
-            debug.log('Scroll ID: %s', scrollId);
+            console.log('Scroll ID: %s', scrollId);
             displayHits(JSON.parse(hits));
         });
 }

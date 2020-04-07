@@ -8,7 +8,7 @@ module.exports = {
     list: () => {
         return axios.get('/endpoints')
             .then(response => {
-                debug.log('Notification Endpoints:');
+                console.log('Notification Endpoints:');
                 console.table(response.data);
             })
     },
@@ -17,20 +17,20 @@ module.exports = {
         // Validate the Endpoint ID
         const idJoiValidate = Joi.number().required().validate(id);
         if(idJoiValidate.error) {
-            debug.log('Please provide a valid Endpoint ID');
+            console.log('Please provide a valid Endpoint ID');
             debug.error(idJoiValidate.error);
             process.exit(1);
         }
         return axios.get(`/endpoints/${id}`)
             .then(response => {
                 const { title, description, url, method, headers, bodyTemplate} = response.data;
-                debug.log('Endpoint: %s', id)
-                debug.log(' Title: %s', title);
-                debug.log(' Description: %s', description);
-                debug.log(' URL: %s', url);
-                debug.log(' Method: %s', method);
-                debug.log(' Headers: %O', headers);
-                debug.log(' Body Template: %O', bodyTemplate);
+                console.log('Endpoint: %s', id)
+                console.log(' Title: %s', title);
+                console.log(' Description: %s', description);
+                console.log(' URL: %s', url);
+                console.log(' Method: %s', method);
+                console.log(' Headers: %O', headers);
+                console.log(' Body Template: %O', bodyTemplate);
             })
     },
     // Delete an endpoint
@@ -38,7 +38,7 @@ module.exports = {
         // Validate the Endpoint ID
         const idJoiValidate = Joi.number().required().validate(id);
         if(idJoiValidate.error) {
-            debug.log('Please provide a valid Endpoint ID');
+            console.log('Please provide a valid Endpoint ID');
             debug.error(idJoiValidate.error);
             process.exit(1);
         }
@@ -62,7 +62,7 @@ module.exports = {
         }
         const { error } = CustomEndpointValidator.validate(data);
         if (error) {
-            debug.log('Please provide valid parts of a custom endpoint request');
+            console.log('Please provide valid parts of a custom endpoint request');
             debug.error(error);
             process.exit(1);
         }
@@ -73,14 +73,14 @@ module.exports = {
         };
         return axios.post('/endpoints/custom', data, config)
             .then(response => {
-                debug.log('Created Custom Endpoint: %s', response.data.id);
+                console.log('Created Custom Endpoint: %s', response.data.id);
             })
     },
     'custom:update': (id, title, description, url, method='POST', headers, bodyTemplate, test=false) => {
         // Validate the Custom Endpoint ID
         const idJoiValidate = Joi.number().required().validate(id);
         if(idJoiValidate.error) {
-            debug.log('Please provide a valid Custom Endpoint ID');
+            console.log('Please provide a valid Custom Endpoint ID');
             debug.error(idJoiValidate.error);
             process.exit(1);
         }
@@ -97,7 +97,7 @@ module.exports = {
         }
         const { error } = CustomEndpointValidator.validate(data);
         if (error) {
-            debug.log('Please provide valid parts of a custom endpoint request');
+            console.log('Please provide valid parts of a custom endpoint request');
             debug.error(error);
             process.exit(1);
         }
@@ -108,7 +108,7 @@ module.exports = {
         };
         return axios.put(`/endpoints/custom/${id}`, data, config)
             .then(response => {
-                debug.log('Updated Custom Endpoint: %s', response.data.id);
+                console.log('Updated Custom Endpoint: %s', response.data.id);
             })
     },
 }

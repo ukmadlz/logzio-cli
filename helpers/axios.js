@@ -12,8 +12,7 @@ const apiBaseUri = () => {
     const confRegion = config.get('region');
 
     if (!confRegion) {
-        debug.Debug.enable('logzio-cli:error');
-        debug.error('Please configure the region for your Logz.IO account');
+        console.error('Please configure the region for your Logz.IO account');
         process.exit(1);
     }
 
