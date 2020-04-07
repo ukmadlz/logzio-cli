@@ -4,6 +4,7 @@ const debug = require('../helpers/debug');
 const displayHits = require('../helpers/displayHits');
 const errorHandler = require('../helpers/errorHandler');
 
+// @TODO: Correct this after @shalper has reviewed the docs
 module.exports = (query, from, size, sort, _source, post_filter, scroll, scrollId) => {
     const data = {};
     if (query) data.query = (typeof query === 'object') ? query : JSON.parse(query);
