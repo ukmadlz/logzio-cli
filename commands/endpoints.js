@@ -1,6 +1,7 @@
 const Joi = require('@hapi/joi');
 const axios = require('../helpers/axios');
 const debug = require('../helpers/debug');
+const errorHandler = require('../helpers/errorHandler');
 const CustomEndpointValidator = require('../validators/customEndpoint');
 
 module.exports = {
@@ -11,6 +12,7 @@ module.exports = {
                 console.log('Notification Endpoints:');
                 console.table(response.data);
             })
+            .catch(errorHandler);
     },
     // Get Endpoint Data
     get: (id) => {
@@ -31,7 +33,8 @@ module.exports = {
                 console.log(' Method: %s', method);
                 console.log(' Headers: %O', headers);
                 console.log(' Body Template: %O', bodyTemplate);
-            })
+            }
+            .catch(errorHandler);
     },
     // Delete an endpoint
     delete: (id) => {
@@ -45,7 +48,8 @@ module.exports = {
         return axios.delete(`/endpoints/${id}`)
             .then(response => {
                 debug.log('Successfully deleted endpoint %s', id);
-            });
+            })
+            .catch(errorHandler);
     },
     // Custom Endpoints
     'custom:create': (title, description, url, method='POST', headers, bodyTemplate, test=false) => {
@@ -75,6 +79,7 @@ module.exports = {
             .then(response => {
                 console.log('Created Custom Endpoint: %s', response.data.id);
             })
+            .catch(errorHandler);
     },
     'custom:update': (id, title, description, url, method='POST', headers, bodyTemplate, test=false) => {
         // Validate the Custom Endpoint ID
@@ -110,5 +115,6 @@ module.exports = {
             .then(response => {
                 console.log('Updated Custom Endpoint: %s', response.data.id);
             })
+            .catch(errorHandler);
     },
 }

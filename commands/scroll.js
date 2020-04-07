@@ -2,6 +2,7 @@ const ScrollValidator = require('../validators/scroll');
 const axios = require('../helpers/axios');
 const debug = require('../helpers/debug');
 const displayHits = require('../helpers/displayHits');
+const errorHandler = require('../helpers/errorHandler');
 
 module.exports = (query, from, size, sort, _source, post_filter, scroll, scrollId) => {
     const data = {};
@@ -24,5 +25,6 @@ module.exports = (query, from, size, sort, _source, post_filter, scroll, scrollI
             const { scrollId, hits } = response.data;
             console.log('Scroll ID: %s', scrollId);
             displayHits(JSON.parse(hits));
-        });
+        })
+        .catch(errorHandler);
 }

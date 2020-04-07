@@ -2,6 +2,7 @@ const SearchValidator = require('../validators/search');
 const axios = require('../helpers/axios');
 const debug = require('../helpers/debug');
 const displayHits = require('../helpers/displayHits');
+const errorHandler = require('../helpers/errorHandler');
 
 module.exports = (query, from, size, sort, _source, post_filter, aggs, dayOffset, accountIds) => {
     const data = {};
@@ -30,5 +31,6 @@ module.exports = (query, from, size, sort, _source, post_filter, aggs, dayOffset
     return axios.post('/search', data, config)
         .then(response => {
             displayHits(response.data.hits);
-        });
+        })
+        .catch(errorHandler);
 }

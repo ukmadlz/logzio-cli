@@ -10,11 +10,10 @@ const conf = new Conf();
  */
 module.exports = (apiToken, region = 'us') => {
     if (!apiToken) {
-        debug.Debug.enable('logzio-cli:error');
-        debug.error('Please provide a valid Logz.IO Access Token');
+        console.log('Please provide a valid Logz.IO Access Token');
         process.exit(1);
     }
-    debug.log('Config saved');
+    console.log('Config saved');
     config.set('API Token', apiToken);
     config.set('region', region);
 }

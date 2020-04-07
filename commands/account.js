@@ -1,11 +1,12 @@
 const axios = require('../helpers/axios');
-const debug = require('../helpers/debug');
+const errorHandler = require('../helpers/errorHandler');
 
 module.exports = {
     whoami: () => {
         return axios.get('/account-management/whoami')
             .then(response => {
-                debug.log(`Account Name: %s`, response.data.accountName);
-            });
+                console.log(`Account Name: %s`, response.data.accountName);
+            })
+            .catch(errorHandler);
     }
 }
